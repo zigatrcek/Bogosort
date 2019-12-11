@@ -2,46 +2,49 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Bogosort {
-	static boolean isSorted = false;
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		int stElementov = sc.nextInt();
-		int[] arr = new int[stElementov];
-		for (int i = 0; i < stElementov; i++) {
+		int numOfElements = sc.nextInt();
+		int[] arr = new int[numOfElements];
+		for (int i = 0; i < numOfElements; i++) {
 			arr[i] = sc.nextInt();
 		}
-		permutate(stElementov, arr);
+		permutate(numOfElements, arr);
 	}
-	
+
 	static void permutate(int n, int[] arr) {
-		if (isSorted) return;
-		boolean jeSortirana = true;
-		for (int i = 1; i < arr.length; i++) {
-			if (arr[i - 1] > arr[i]) {
-				jeSortirana = false;
-				break;
+		int[] indexes = new int[n];
+		for (int i = 0; i < n; i++) {
+			indexes[i] = 0;
+		}
+		System.out.println(Arrays.toString(arr));
+		int i = 0;
+		while (i < n) {
+			boolean isSorted = true;
+			for (int j = 1; j < arr.length; j++) {
+				if (arr[j - 1] > arr[j]) {
+					isSorted = false;
+					break;
+				}
 			}
-		}
-		if (jeSortirana) {
-			System.out.println("Uspelo mi je!");
-			System.out.println(Arrays.toString(arr));
-			isSorted = true;
-			return;
-		}
-		if (n == 1) {
-			System.out.println(Arrays.toString(arr));
-			return;
-		}
-		for (int i = 0; i < n - 1; i++) {
-			permutate(n - 1, arr);
-			if (n % 2 == 0) {
-				swap(arr, i, n - 1);
+			if (isSorted) {
+				System.out.println("Uspelo mi je!");
+				System.out.println(Arrays.toString(arr));
+				return;
+			}
+			if (indexes[i] < i) {
+				// if i is divisible by 2, we swap it with the 0th element,
+				// otherwise we swap it with the next i
+				swap(arr, i % 2 == 0 ? 0 : indexes[i], i);
+				System.out.println(Arrays.toString(arr));
+				indexes[i]++;
+				i = 0;
 			}
 			else {
-				swap(arr, 0, n - 1);
+				indexes[i] = 0;
+				i++;
 			}
 		}
-		permutate(n - 1, arr);
 	}
 	static void swap(int[] arr, int a, int b) {
 		int temp = arr[a];
@@ -49,4 +52,3 @@ public class Bogosort {
 		arr[b] = temp;
 	}
 }
-		
