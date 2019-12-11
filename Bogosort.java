@@ -34,7 +34,7 @@ public class Bogosort {
 			}
 			if (indexes[i] < i) {
 				// if i is divisible by 2, we swap it with the 0th element,
-				// otherwise we swap it with the next i
+				// otherwise we swap it with the next element in indexes[i]
 				swap(arr, i % 2 == 0 ? 0 : indexes[i], i);
 				System.out.println(Arrays.toString(arr));
 				indexes[i]++;
