@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Bogosort",
+            "request": "launch",
+            "mainClass": "Bogosort",
+            "projectName": "Bogosort_1b92f90d"
+        }
+    ]
+}
